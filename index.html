@@ -84,6 +84,7 @@ body {
   color: var(--cds-text-primary);
   font-size: .875rem;
   line-height: 1.42857;
+  font-weight: 500;
   -webkit-font-smoothing: antialiased;
 }
 a{color:var(--cds-link-primary);text-decoration:none}
@@ -120,7 +121,7 @@ strong{font-weight:600}
   background: #6f6f6f;
 }
 .ui-shell__name .sub {
-  font-weight: 400;
+  font-weight: 500;
   color: #a8a8a8;
 }
 
@@ -128,13 +129,40 @@ strong{font-weight:600}
    HERO
 ═══════════════════════════════════════════════ */
 .hero {
-  background: #0f62fe;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255,255,255,.42) 0 6%, transparent 18%),
+    radial-gradient(circle at 83% 20%, rgba(120,169,255,.46) 0 9%, transparent 22%),
+    radial-gradient(circle at 75% 82%, rgba(8,189,186,.36) 0 7%, transparent 25%),
+    linear-gradient(135deg, #161616 0%, #0f62fe 46%, #4589ff 100%);
   padding: var(--s-09) var(--s-05) var(--s-08);
 }
-.hero-inner { max-width: 1056px; margin: 0 auto; }
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -35%;
+  z-index: -2;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 520'%3E%3Cdefs%3E%3Cfilter id='blur'%3E%3CfeGaussianBlur stdDeviation='42'/%3E%3C/filter%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%23ffffff' stop-opacity='.55'/%3E%3Cstop offset='.45' stop-color='%2378a9ff' stop-opacity='.40'/%3E%3Cstop offset='1' stop-color='%2308bdba' stop-opacity='.28'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg fill='none' stroke='url(%23g)' stroke-width='2.2' filter='url(%23blur)'%3E%3Cpath d='M-80 340 C160 120 310 520 540 280 S860 40 1280 220'/%3E%3Cpath d='M-40 210 C170 20 380 360 620 180 S930 160 1240 -20'/%3E%3Cpath d='M40 500 C260 260 430 460 700 330 S980 60 1260 120'/%3E%3Cpath d='M-120 80 C140 300 300 -30 560 120 S900 430 1320 240'/%3E%3C/g%3E%3Cg fill='%23ffffff' fill-opacity='.055'%3E%3Ccircle cx='190' cy='120' r='130'/%3E%3Ccircle cx='920' cy='140' r='210'/%3E%3Ccircle cx='760' cy='390' r='170'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  transform: rotate(-4deg) scale(1.05);
+  opacity: .88;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(22,22,22,.78) 0%, rgba(15,98,254,.38) 48%, rgba(15,98,254,.08) 100%);
+}
+.hero-inner { max-width: 1056px; margin: 0 auto; position: relative; }
 .hero__eyebrow {
   font-size: .75rem;
-  font-weight: 400;
+  font-weight: 700;
   letter-spacing: .32px;
   color: #a6c8ff;
   text-transform: uppercase;
@@ -142,7 +170,7 @@ strong{font-weight:600}
 }
 .hero__title {
   font-size: clamp(1.75rem, 4vw, 2.625rem);
-  font-weight: 300;
+  font-weight: 700;
   line-height: 1.19;
   color: #ffffff;
   margin-bottom: var(--s-04);
@@ -150,7 +178,7 @@ strong{font-weight:600}
 }
 .hero__subtitle {
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.5;
   color: #d0e2ff;
   max-width: 560px;
@@ -178,7 +206,7 @@ strong{font-weight:600}
 .date-item:last-child{border-right:none}
 .date-item__label {
   font-size: .6875rem;
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: .32px;
   color: var(--cds-text-helper);
   text-transform: uppercase;
@@ -287,13 +315,14 @@ strong{font-weight:600}
 .tile-btn__icon { font-size: 1.25rem; margin-bottom: var(--s-03); }
 .tile-btn__title {
   font-size: .875rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--cds-text-primary);
   line-height: 1.28572;
 }
 .tile-btn__desc {
   font-size: .75rem;
-  color: var(--cds-text-helper);
+  color: var(--cds-text-secondary);
+  font-weight: 500;
   margin-top: var(--s-01);
 }
 
@@ -366,6 +395,7 @@ strong{font-weight:600}
 .election-card__desc {
   font-size: .875rem;
   color: var(--cds-text-secondary);
+  font-weight: 500;
   margin-top: var(--s-02);
   line-height: 1.5;
 }
@@ -409,6 +439,45 @@ strong{font-weight:600}
 .party-pill--진보 { background: #6929c4; }
 .party-pill--보수 { background: #b45309; }
 .party-pill--reform { background: #198038; }
+
+
+/* ── Candidate portrait block ── */
+.cand-headline {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: var(--s-04);
+  align-items: center;
+  margin-bottom: var(--s-05);
+}
+.cand-photo {
+  width: 4.5rem;
+  height: 4.5rem;
+  background: var(--cds-layer-01);
+  border: 1px solid var(--cds-border-subtle-01);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cds-text-primary);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  overflow: hidden;
+  position: relative;
+}
+.cand-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.cand-photo img[src=""] { display: none; }
+.cand-photo--민주 { background:#d0e2ff; color:#002d9c; border-color:#78a9ff; }
+.cand-photo--국힘 { background:#ffd7d9; color:#750e13; border-color:#ff8389; }
+.cand-photo--진보 { background:#e8daff; color:#31135e; border-color:#be95ff; }
+.cand-photo--보수 { background:#ffead1; color:#5e2900; border-color:#ffb784; }
+.cand-photo--reform { background:#defbe6; color:#044317; border-color:#42be65; }
+.cand-meta { min-width: 0; }
+@media(max-width:480px){.cand-headline{grid-template-columns:3.75rem 1fr}.cand-photo{width:3.75rem;height:3.75rem;font-size:1.25rem}}
 
 /* ═══════════════════════════════════════════════
    POLL BARS
@@ -482,6 +551,14 @@ strong{font-weight:600}
 }
 @media(max-width:640px){.candidates-grid{grid-template-columns:1fr}}
 
+#gyeonggi-gov .candidates-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+#gyeonggi-gov .risk-cols { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media(max-width:900px){ #gyeonggi-gov .candidates-grid, #gyeonggi-gov .risk-cols { grid-template-columns: 1fr; } }
+.candidate-tile--reform { border-top-color: #198038; }
+.party-pill--reform { background: #198038; }
+.cand-photo--reform { background:#defbe6; color:#044317; border-color:#42be65; }
+
+
 .candidate-tile {
   background: var(--cds-background);
   padding: var(--s-05);
@@ -495,14 +572,15 @@ strong{font-weight:600}
 
 .cand-name {
   font-size: 1.5rem;
-  font-weight: 300;
+  font-weight: 650;
   color: var(--cds-text-primary);
   margin-bottom: var(--s-02);
   line-height: 1.2;
 }
 .cand-role {
   font-size: .75rem;
-  color: var(--cds-text-helper);
+  color: var(--cds-text-secondary);
+  font-weight: 500;
   margin-bottom: var(--s-05);
   line-height: 1.5;
 }
@@ -965,6 +1043,14 @@ footer p + p { margin-top: var(--s-03); }
     </div>
   </div>
 
+  <div class="notif notif--info">
+    <span class="notif__icon">ⓘ</span>
+    <div class="notif__body">
+      <div class="notif__title">후보 사진 표시 방식</div>
+      <div class="notif__subtitle">사진은 선관위 공식 등록 사진을 제공하는 PoliChart 미러, 위키미디어, 언론·캠프 제공 이미지를 내려받아 로컬 assets 폴더에 포함했습니다. 공식 사진을 안정적으로 확인하지 못한 일부 후보는 이니셜 포트레이트로 남겨두었습니다.</div>
+    </div>
+  </div>
+
   <!-- Ballot Overview -->
   <div class="ballot-section">
     <div class="section-label">수지구 주민이 받는 투표용지 — 최대 7장</div>
@@ -994,18 +1080,13 @@ footer p + p { margin-top: var(--s-03); }
         <span class="tile-btn__title">용인시의원</span>
         <span class="tile-btn__desc">기초의원 2장</span>
       </button>
+      <button class="tile-btn" onclick="showSection('how-to');setTile(this)">
+        <span class="tile-btn__icon">📋</span>
+        <span class="tile-btn__title">투표방법</span>
+        <span class="tile-btn__desc">7장 체크리스트</span>
+      </button>
     </div>
   </div>
-
-  <!-- Content Switcher -->
-  <nav class="content-switcher" aria-label="선거 섹션">
-    <button class="cs-btn active" onclick="showSection('gyeonggi-gov');setTab(this)">① 경기도지사</button>
-    <button class="cs-btn" onclick="showSection('edu');setTab(this)">② 교육감</button>
-    <button class="cs-btn" onclick="showSection('yongin-mayor');setTab(this)">③ 용인시장</button>
-    <button class="cs-btn" onclick="showSection('assembly');setTab(this)">④ 경기도의원</button>
-    <button class="cs-btn" onclick="showSection('city-council');setTab(this)">⑤ 용인시의원</button>
-    <button class="cs-btn" onclick="showSection('how-to');setTab(this)">📋 투표방법</button>
-  </nav>
 
   <!-- ═══════════ ① 경기도지사 ═══════════ -->
   <div id="gyeonggi-gov" class="section active">
@@ -1044,27 +1125,33 @@ footer p + p { margin-top: var(--s-03); }
 
         <div class="candidates-grid">
           <div class="candidate-tile candidate-tile--민주">
-            <span class="party-pill party-pill--민주">더불어민주당</span>
-            <div class="cand-name">추미애</div>
-            <div class="cand-role">전 법무부장관 · 전 민주당 대표 · 前 국회의원</div>
+            <div class="cand-headline"><div class="cand-photo cand-photo--민주"><img src="assets/candidates/choo.jpg" alt="추미애 후보 사진" loading="lazy" referrerpolicy="no-referrer"></div><div class="cand-meta"><span class="party-pill party-pill--민주">더불어민주당</span><div class="cand-name">추미애</div><div class="cand-role">전 법무부장관 · 전 민주당 대표 · 前 국회의원</div></div></div>
             <ul class="pledge-list">
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title"><strong>1호</strong> 수도권 30분 출근 대전환</span><span class="pledge-item__detail">GTX 전 노선 완전 개통 + 광역버스 준공영제 도입으로 경기 어디서든 서울까지 30분 내 출근 가능하도록 대중교통 체계 전면 개편.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">공공주택 14.8만 가구 공급 (5년 임기)</span><span class="pledge-item__detail">임기 5년간 공공분양·임대 합산 14.8만 가구를 경기도 전역에 공급해 청년·서민 주거 불안 해소.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">반도체 생태계 클러스터 구축</span><span class="pledge-item__detail">용인·평택·이천을 잇는 반도체 밸리를 설계·생산·소재·장비 전 공정 통합 클러스터로 완성, 경기도를 글로벌 반도체 거점으로 육성.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">경기공유학교·돌봄 확대</span><span class="pledge-item__detail">공공시설·학교 연계 공유교육 네트워크와 방과후 돌봄 확대로 사교육비 절감, 교육 격차 해소.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">기후·에너지 정의 실현</span><span class="pledge-item__detail">2040 탄소중립 경기 로드맵 수립, 취약계층 에너지 비용 지원과 재생에너지 전환을 동시에 추진.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title"><strong>1호</strong> 수도권 30분 출근 대전환</span><span class="pledge-item__detail">GTX-A·B·C는 지연 없이 추진하고 D·E·F 및 GTX 플러스 G·H 노선은 국가철도망 계획 반영을 압박. 서울·인천과 요금·환승을 묶는 ‘수도권 원패스’, 청소년 교통비 지원, 광역버스·철도 연계를 함께 추진해 수지→강남·판교 통근 체감시간을 줄이는 구상.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">공공주택 14.8만 가구 공급 (5년 임기)</span><span class="pledge-item__detail">공공택지 37만 가구, 매입임대 12.8만 가구, 전세임대 6만 가구, 공공지원 민간임대 2만 가구 이상 등 총 55만 가구 공급 기반을 조성한다는 큰 그림. 역세권 지분적립형 2만호, 환매조건 토지임대부 2만호, 청년·신혼부부 매입임대 8000호처럼 ‘초기 부담 낮춘 주택’이 핵심.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">반도체 생태계 클러스터 구축</span><span class="pledge-item__detail">용인·평택·이천 생산축에 수원·성남의 설계·AI 역량, 안성·화성의 소재·부품·장비·후공정을 연결하는 전주기 생태계 전략. 전력·용수·인허가 패스트트랙을 도가 직접 조율해 산단 착공·입주 병목을 줄이는 방향.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">경기공유학교·돌봄 확대</span><span class="pledge-item__detail">도서관·체육관·문화센터·대학 시설을 학교 밖 배움터로 묶어 지역별 공유학교를 확대. 맞벌이 가정이 많은 수지권에는 방과후·저녁돌봄·방학돌봄 공백을 줄이는 생활형 돌봄 인프라로 연결될 수 있음.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">기후·에너지 정의 실현</span><span class="pledge-item__detail">공공건물 태양광·건물 에너지 효율 개선·산단 RE100 전환을 묶어 기업 탄소비용을 낮추는 전략. 폭염·한파 취약계층 냉난방비 지원과 노후주택 단열 개선을 병행해 ‘기후정책=생활비 절감’으로 설계.</span></div></li>
             </ul>
           </div>
           <div class="candidate-tile candidate-tile--국힘">
-            <span class="party-pill party-pill--국힘">국민의힘</span>
-            <div class="cand-name">양향자</div>
-            <div class="cand-role">前 삼성전자 반도체 엔지니어 · 前 국회의원</div>
+            <div class="cand-headline"><div class="cand-photo cand-photo--국힘"><img src="assets/candidates/yang.jpg" alt="양향자 후보 사진" loading="lazy" referrerpolicy="no-referrer"></div><div class="cand-meta"><span class="party-pill party-pill--국힘">국민의힘</span><div class="cand-name">양향자</div><div class="cand-role">前 삼성전자 반도체 엔지니어 · 前 국회의원</div></div></div>
             <ul class="pledge-list">
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title"><strong>1호</strong> AI·반도체 1인당 GRDP 1억원 시대</span><span class="pledge-item__detail">반도체·AI 산업 집중 육성으로 경기도 1인당 지역내총생산을 1억원 이상으로 끌어올리는 중장기 경제성장 목표.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">용인 반도체 국가산단 + 권역별 첨단산단</span><span class="pledge-item__detail">용인 삼성·SK 반도체 국가산단 조성을 가속화하고, 수원·평택·이천 등 경기 각 권역에도 첨단산단을 병행 유치.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">반도체 용수 보상·규제 타파 (여주 이포보)</span><span class="pledge-item__detail">여주 이포보 환경 규제 완화를 추진해 반도체 공장 냉각·공정용수 문제를 현실적으로 해결.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">서울 30분 '지하철 5철' 구축</span><span class="pledge-item__detail">경기-서울 간 5개 광역철도 노선 신설·연장으로 수도권 남부·동부에서도 30분 내 서울 도심 접근 실현.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">중첩규제 쇄신·경제 선거 기조</span><span class="pledge-item__detail">수도권정비계획법·개발제한구역 등 중첩 규제를 경제 성장 관점에서 전면 재검토하여 기업 투자 환경 개선.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title"><strong>1호</strong> AI·반도체 1인당 GRDP 1억원 시대</span><span class="pledge-item__detail">현재 경기도 경제를 AI·반도체 중심으로 재편해 1인당 GRDP 1억원, 총 GRDP 750조원 규모를 목표로 제시. ‘복지 확대도 결국 세수·일자리에서 나온다’는 경제도지사 프레임이 핵심.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">용인 반도체 국가산단 + 권역별 첨단산단</span><span class="pledge-item__detail">경기남부는 초광역 AI·반도체 클러스터, 서부는 AI 스마트제조, 중부는 스마트 첨단 자족도시, 북부는 미래 신산업·평화경제 거점, 동부는 문화·레저·휴양밸리로 5대 권역별 성장축을 제시.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">반도체 용수 보상·규제 타파 (여주 이포보)</span><span class="pledge-item__detail">용인·평택 반도체 산단의 핵심 병목인 용수 확보를 위해 여주 이포보 등 공급지역의 희생을 보상 패키지와 연결. 물 공급 지역에는 규제 완화, SOC·세수 배분, 주민 보상책을 동시에 요구하는 방식.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">서울 30분 '지하철 5철' 구축</span><span class="pledge-item__detail">‘지하철 5철’은 하남·광주·성남 등 서울 접경권 광역철도 연장 묶음 공약으로, 서울 30분 생활권 확대가 목표. 수지구와 직접 연결되는 노선은 공보물에서 추가 확인이 필요하나, 광역철도 예산 확보 능력을 평가할 포인트.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">중첩규제 쇄신·경제 선거 기조</span><span class="pledge-item__detail">수도권 규제·상수원 규제·그린벨트가 겹친 지역은 투자 유치가 막힌다는 문제의식. 개발이익 일부를 지역 인프라와 환경 보전에 재투자하는 조건부 규제 완화 모델을 강조.</span></div></li>
+            </ul>
+          </div>
+          <div class="candidate-tile candidate-tile--reform">
+            <div class="cand-headline"><div class="cand-photo cand-photo--reform"><img src="assets/candidates/cho.jpg" alt="조응천 후보 사진" loading="lazy" referrerpolicy="no-referrer"></div><div class="cand-meta"><span class="party-pill party-pill--reform">개혁신당</span><div class="cand-name">조응천</div><div class="cand-role">前 청와대 공직기강비서관 · 前 20·21대 국회의원</div></div></div>
+            <ul class="pledge-list">
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title"><strong>1호</strong> 전세대란 해법 · 거주 이전 자유 회복</span><span class="pledge-item__detail">전세시장 불확실성을 줄이고 임차인의 이동권을 회복하는 주거 안정 공약을 1순위로 제시. 임대차 시장 경직을 풀어 실수요자가 원하는 지역으로 옮길 수 있게 하는 ‘부동산 정상화’ 프레임이 핵심.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">반도체 익스프레스 · 경기남부 반도체 벨트 수호</span><span class="pledge-item__detail">화성·평택·용인으로 이어지는 반도체 축을 강제로 분산하지 않고 집중 지원하겠다는 노선. 산단 안팎에 학교·병원·문화·쇼핑 인프라를 함께 짓는 실리콘밸리식 자족형 클러스터를 제안.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">배차·대기환경 개선 중심 교통 공약</span><span class="pledge-item__detail">새 노선 발표보다 시민이 매일 겪는 버스 배차 간격, 환승 대기, 정류장 대기환경 개선을 강조. 광역버스 증차·정류장 편의·환승 체계 개선처럼 ‘바로 체감되는 교통’에 초점.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">경기북부 4대 중첩규제 → 국방 R&amp;D 벨트</span><span class="pledge-item__detail">군사보호구역·접경지역·수도권정비계획·환경규제로 묶인 북부 6개 시군을 국방 R&amp;D·드론·방산 실증 거점으로 전환하겠다는 공약. 희생 보상형 개발이 아니라 젊은 산업 일자리 창출을 내세움.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">양당 카르텔 견제 · 토론 참여 압박</span><span class="pledge-item__detail">거대 양당 후보가 토론을 회피한다고 비판하며 공신력 있는 여론조사·토론을 요구. 당선 가능성보다 ‘견제와 정책 경쟁 촉진’ 역할을 강조하는 제3지대 전략.</span></div></li>
             </ul>
           </div>
         </div>
@@ -1100,12 +1187,19 @@ footer p + p { margin-top: var(--s-03); }
               <div class="risk-item"><span class="risk-dot"></span><div><span class="risk-item__label">반도체특별법 과장</span><span class="risk-item__text">국회의원 시절 반도체특별법 성과를 본인 단독 업적처럼 홍보, 과장 비판.</span></div></div>
               <div class="risk-item"><span class="risk-dot"></span><div><span class="risk-item__label">단식 선거용 퍼포먼스</span><span class="risk-item__text">과거 단식 농성이 실질 성과 없는 언론 노출용이라는 비판이 반복.</span></div></div>
             </div>
+            <div>
+              <div class="risk-col__head" style="color:#198038">조응천 (개혁)</div>
+              <div class="risk-item"><span class="risk-dot"></span><div><span class="risk-item__label">낮은 당선 가능성</span><span class="risk-item__text">최근 여론조사 6.6% 수준으로, 실제 승리보다 양당 견제·캐스팅보트 역할에 가까운 포지션.</span></div></div>
+              <div class="risk-item"><span class="risk-dot"></span><div><span class="risk-item__label">보수·중도 표 분산 논란</span><span class="risk-item__text">양향자 후보와 중도·비민주 표가 겹쳐 야권 단일화·연대 압박을 받을 가능성.</span></div></div>
+              <div class="risk-item"><span class="risk-dot"></span><div><span class="risk-item__label">개혁신당 조직력 한계</span><span class="risk-item__text">거대 양당 대비 지역 조직·기초의원 네트워크가 약해 공약 집행 기반과 선거 동원력이 제한적.</span></div></div>
+              <div class="risk-item"><span class="risk-dot"></span><div><span class="risk-item__label">정책 인지도 부족</span><span class="risk-item__text">반도체·전세·교통 공약을 냈지만 선거 프레임이 추미애-양향자 대결로 흐르며 메시지가 묻힐 위험.</span></div></div>
+            </div>
           </div>
         </div>
 
         <div class="verdict-panel">
           <div class="verdict-panel__title">🔎 판세 분석</div>
-          <p>현재 추미애 후보가 약 <strong>20%p 가까운 격차</strong>로 앞서 있습니다. 양향자 후보는 '반도체 전문가' 이미지와 경제 이슈로 격차 축소를 노리고 있습니다. 개혁신당 조응천 후보는 6.6%로 제3의 선택지입니다. 수지구 포함 경기 남부는 반도체·교통이 핵심 생활 이슈이므로 두 후보의 철도·교통 공약을 공보물에서 꼼꼼히 확인해 보세요.</p>
+          <p>현재 추미애 후보가 약 <strong>20%p 가까운 격차</strong>로 앞서 있습니다. 양향자 후보는 '반도체 전문가' 이미지와 경제 이슈로 격차 축소를 노리고 있습니다. 개혁신당 조응천 후보는 6.6%로 제3의 선택지이며, 전세·반도체·생활교통 의제를 통해 양당 구도 균열을 노리고 있습니다. 수지구 포함 경기 남부는 반도체·교통이 핵심 생활 이슈이므로 세 후보의 철도·교통·주거 공약을 공보물에서 꼼꼼히 확인해 보세요.</p>
         </div>
       </div>
     </div>
@@ -1150,28 +1244,24 @@ footer p + p { margin-top: var(--s-03); }
 
         <div class="candidates-grid">
           <div class="candidate-tile candidate-tile--진보">
-            <span class="party-pill party-pill--진보">진보 단일후보</span>
-            <div class="cand-name">안민석</div>
-            <div class="cand-role">前 5선 국회의원 (민주당) · 진보 진영 단일후보</div>
+            <div class="cand-headline"><div class="cand-photo cand-photo--진보"><img src="assets/candidates/ahn.jpg" alt="안민석 후보 사진" loading="lazy" referrerpolicy="no-referrer"></div><div class="cand-meta"><span class="party-pill party-pill--진보">진보 단일후보</span><div class="cand-name">안민석</div><div class="cand-role">前 5선 국회의원 (민주당) · 진보 진영 단일후보</div></div></div>
             <ul class="pledge-list">
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">교권 회복 · 학교지원 중심 교육행정</span><span class="pledge-item__detail">교사 민원 방어막 강화, 담임교사 행정업무 감축으로 교사가 수업에만 집중할 수 있는 환경 조성.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">경기교육격차 지수 도입</span><span class="pledge-item__detail">지역·소득·학교별 교육격차를 수치로 측정, 데이터 기반으로 취약 지역에 예산 우선 배분.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">교육지원청 6곳 신설 (25→31개)</span><span class="pledge-item__detail">교육지원청 확대로 학교 현장-교육청 간 거리를 줄이고 행정 대응 속도 향상.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">안심에듀버스 확대 (통학권 보장)</span><span class="pledge-item__detail">교통 취약 지역 학생을 위한 공공통학버스 노선 확대, 안전한 등하굣길 보장.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">반려 스포츠·악기·독서 'SPR' 도입</span><span class="pledge-item__detail">모든 학생이 스포츠·악기·독서 중 하나를 학교생활 내내 꾸준히 배울 수 있도록 지원하는 전인교육 프로그램.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">교권 회복 · 학교지원 중심 교육행정</span><span class="pledge-item__detail">악성 민원은 교육청·전문기관이 1차 대응하고, 학교는 수업·생활지도 중심으로 재편. 교권보호 전담팀, 법률지원, 담임 행정업무 감축을 묶어 ‘교사가 학부모 민원에 혼자 노출되지 않는 구조’를 만들겠다는 방향.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">경기교육격차 지수 도입</span><span class="pledge-item__detail">학력·돌봄·통학·문화예술·진로체험 기회를 지표화해 31개 시군·학교별 격차를 지도처럼 공개. 예산을 균등 배분이 아니라 격차가 큰 학교·지역에 더 주는 ‘가중 배분’으로 바꾸겠다는 의미.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">교육지원청 6곳 신설 (25→31개)</span><span class="pledge-item__detail">현재 25개 교육지원청을 31개 시군 체계에 맞춰 6곳 추가 신설. 교육장 공모제, 지역별 예산·인사 권한 확대를 통해 신도시 과밀·구도심 격차 같은 현안을 현장 가까이에서 처리하겠다는 구상.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">안심에듀버스 확대 (통학권 보장)</span><span class="pledge-item__detail">무상 통학버스·워킹스쿨버스·실시간 위치 확인 기능을 결합한 통학 안전 패키지. 수지권처럼 통학로 혼잡·학원가 차량 문제가 있는 지역은 학교 주변 보행 안전 개선과 연결해 볼 수 있음.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">반려 스포츠·악기·독서 'SPR' 도입</span><span class="pledge-item__detail">‘1인 1운동·1악기·매일 독서’에 가까운 모델로, 입시 과목 밖의 기본 체력·예술·문해력을 학교가 책임지겠다는 방향. 사교육이 아닌 공교육 시간표 안에서 경험 격차를 줄이는 것이 목표.</span></div></li>
               <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">지자체 예산 5% 교육 투자 유도</span><span class="pledge-item__detail">경기 31개 시군과 협약을 맺어 자치단체 예산의 5%를 교육분야에 투자하도록 유도, 재원 폭 확대.</span></div></li>
             </ul>
           </div>
           <div class="candidate-tile candidate-tile--보수">
-            <span class="party-pill party-pill--보수">보수 현직</span>
-            <div class="cand-name">임태희</div>
-            <div class="cand-role">現 경기도교육감 (재선 도전) · 前 고용노동부장관</div>
+            <div class="cand-headline"><div class="cand-photo cand-photo--보수"><img src="assets/candidates/lim.jpg" alt="임태희 후보 사진" loading="lazy" referrerpolicy="no-referrer"></div><div class="cand-meta"><span class="party-pill party-pill--보수">보수 현직</span><div class="cand-name">임태희</div><div class="cand-role">現 경기도교육감 (재선 도전) · 前 고용노동부장관</div></div></div>
             <ul class="pledge-list">
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">AI 학습 플랫폼 '하이러닝' 완성</span><span class="pledge-item__detail">경기교육청 자체 개발 AI 학습 플랫폼을 전교생 대상 완성형 서비스로 고도화, 수준별 맞춤 학습 제공.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">AI 서·논술형 평가 → 대입제도 개혁</span><span class="pledge-item__detail">객관식 중심 수능 틀을 벗어나 서술·논술형 AI 평가를 경기도 선도로 도입해 대입 체계 변화를 주도.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">초등 돌봄 대기 해소</span><span class="pledge-item__detail">초등 방과후 돌봄 신청 시 대기 없이 이용 가능한 체계 구축, 맞벌이 가정 부담 경감.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">경기공유학교·온라인학교 학습 안전망</span><span class="pledge-item__detail">학교 밖 청소년·위기 학생을 위한 온라인 플랫폼과 공유학교 네트워크로 교육 사각지대 완전 해소.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">사각지대 해소 중심 교육복지</span><span class="pledge-item__detail">다문화·장애·저소득 학생 맞춤 지원 확대와 특수교육 인프라 강화로 출발선 평등 구현.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">AI 학습 플랫폼 '하이러닝' 완성</span><span class="pledge-item__detail">하이러닝을 공공 AI 학습 플랫폼으로 고도화해 학생별 취약 단원·문항·학습속도를 분석. 민간 에듀테크에 학생 데이터가 과도하게 넘어가지 않도록 ‘공공 플랫폼·데이터 주권·보안’을 함께 내세움.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">AI 서·논술형 평가 → 대입제도 개혁</span><span class="pledge-item__detail">손글씨 답안을 OCR로 인식하고 AI가 1차 채점을 보조하는 서·논술 평가 모델을 확대. 상대평가·객관식 중심 대입을 절대평가·과정중심 평가로 바꾸는 실험을 경기도에서 먼저 완성하겠다는 공약.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">초등 돌봄 대기 해소</span><span class="pledge-item__detail">초등 돌봄 대기자 ‘제로’에 가까운 체계를 목표로 학교 안 돌봄교실, 지역 거점 돌봄, 방학 돌봄을 통합 운영. 신도시 맞벌이 가구가 많은 수지구에 직접 체감도가 큰 공약.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">경기공유학교·온라인학교 학습 안전망</span><span class="pledge-item__detail">경기공유학교는 지역 시설·전문가를 수업 자원으로 연결하고, 온라인학교는 질병·부적응·대안교육 학생의 학습권을 보완. 학교 하나가 모든 과목·활동을 떠안는 구조를 분산시키는 전략.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">사각지대 해소 중심 교육복지</span><span class="pledge-item__detail">기초학력 진단, 마음건강, 특수교육 보조인력, 다문화 언어지원 등 취약 학생에게 필요한 서비스를 조기 연결. ‘평균 학생’ 중심 정책이 아니라 학생 유형별 맞춤 지원을 강화하는 쪽.</span></div></li>
             </ul>
           </div>
         </div>
@@ -1255,29 +1345,25 @@ footer p + p { margin-top: var(--s-03); }
 
         <div class="candidates-grid">
           <div class="candidate-tile candidate-tile--민주">
-            <span class="party-pill party-pill--민주">더불어민주당</span>
-            <div class="cand-name">현근택</div>
-            <div class="cand-role">前 민주연구원 부원장 · 前 민주당 정책위 부의장</div>
+            <div class="cand-headline"><div class="cand-photo cand-photo--민주"><img src="assets/candidates/hyun.jpg" alt="현근택 후보 사진" loading="lazy" referrerpolicy="no-referrer"></div><div class="cand-meta"><span class="party-pill party-pill--민주">더불어민주당</span><div class="cand-name">현근택</div><div class="cand-role">前 민주연구원 부원장 · 前 민주당 정책위 부의장</div></div></div>
             <ul class="pledge-list">
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">반도체 배후 신도시 규모 2배 확대 (330만㎡+)</span><span class="pledge-item__detail">반도체 국가산단 배후 신도시를 현 계획의 2배 이상(660만㎡+)으로 확대, 산단 근로자 주거·생활 인프라 선제 구축.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">경제자유구역 지정으로 외국기업·국제학교 유치</span><span class="pledge-item__detail">용인 일대를 경제자유구역으로 지정, 세금·규제 혜택을 부여해 외국 R&amp;D센터·국제학교를 유치하고 글로벌 도시로 전환.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">5000억 벤처 투자펀드 (소부장·미래산업)</span><span class="pledge-item__detail">시 주도 5000억원 규모 벤처투자펀드 조성, 반도체 소재·부품·장비 및 AI·바이오 스타트업에 집중 투자.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">YTX (용인분당급행철도) 신설 · JTX 조기추진</span><span class="pledge-item__detail">용인~분당 급행철도 신설로 수지·죽전~판교 출근시간 대폭 단축. 용인발 KTX 직결(JTX)도 병행 추진.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">용인에너지주식회사 설립 (태양광 시민배당)</span><span class="pledge-item__detail">태양광 등 재생에너지 발전 이익을 시민에게 배당하는 공공에너지 회사 설립.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">반도체 배후 신도시 규모 2배 확대 (330만㎡+)</span><span class="pledge-item__detail">현재 약 228.8만㎡(69만평) 배후 신도시 계획에 약 330.6만㎡(100만평)를 추가해 주거·상업·교육·의료 기능을 갖춘 자족도시로 키우겠다는 구상. ‘일자리만 있고 살 곳은 없는 산단’을 막겠다는 메시지.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">경제자유구역 지정으로 외국기업·국제학교 유치</span><span class="pledge-item__detail">경제자유구역 지정으로 외국계 반도체·AI 기업의 연구소, 외국인 임직원 주거·교육 인프라, 국제학교 유치를 패키지로 추진. 지정 자체는 중앙정부·경기도 협의가 필요해 실행력과 정치력이 관건.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">5000억 벤처 투자펀드 (소부장·미래산업)</span><span class="pledge-item__detail">반도체 팹 자동화로 직접 고용이 제한될 수 있다는 점을 보완하기 위해 소부장·설계·검사·후공정·AI 스타트업을 키우는 펀드. 시 재정, 민간 LP, 정책금융을 섞어 조성할 가능성이 큼.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">YTX (용인분당급행철도) 신설 · JTX 조기추진</span><span class="pledge-item__detail">YTX는 용인·분당·판교 축을 급행으로 묶어 수지·죽전의 판교·강남 접근성을 개선하는 지역형 철도 공약. JTX·경기남부광역철도와 함께 국가철도망 반영 여부가 실제 추진의 1차 관문.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">용인에너지주식회사 설립 (태양광 시민배당)</span><span class="pledge-item__detail">시 소유 유휴부지·공공건물 지붕에 태양광을 설치하고 시민 투자·배당형 모델을 도입. 발전 수익 일부는 에너지 취약계층 지원과 공공요금 부담 완화에 쓰겠다는 설계.</span></div></li>
               <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">민원 소통 앱 '용인똑똑' 개발</span><span class="pledge-item__detail">도로파손·불법주정차·공원 민원 등을 실시간 신고·처리하는 스마트 민원 앱 개발.</span></div></li>
             </ul>
           </div>
           <div class="candidate-tile candidate-tile--국힘">
-            <span class="party-pill party-pill--국힘">국민의힘</span>
-            <div class="cand-name">이상일</div>
-            <div class="cand-role">現 용인특례시장 (재선 도전) · 前 국회의원</div>
+            <div class="cand-headline"><div class="cand-photo cand-photo--국힘"><img src="assets/candidates/lee-sangil.jpg" alt="이상일 후보 사진" loading="lazy" referrerpolicy="no-referrer"></div><div class="cand-meta"><span class="party-pill party-pill--국힘">국민의힘</span><div class="cand-name">이상일</div><div class="cand-role">現 용인특례시장 (재선 도전) · 前 국회의원</div></div></div>
             <ul class="pledge-list">
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">'용인 르네상스 시즌2' — 공약 이행률 95% 강조</span><span class="pledge-item__detail">1기 임기 공약의 95%를 이행했다고 강조하며 연속성과 신뢰를 재선 핵심 근거로 제시.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">반도체고속도로 · 용인-성남·충주고속도로</span><span class="pledge-item__detail">삼성·SK 반도체 산단과 인근 고속도로를 잇는 전용 산업도로 추진, 물류 병목 해소.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">경강선 연장 · 3호선 연장 · 신분당선 지선</span><span class="pledge-item__detail">수지·기흥·처인구까지 지하철 노선 동시 연장 추진으로 용인 전역 광역교통망 완성.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">반도체 특화 대도시 완성도 제고</span><span class="pledge-item__detail">삼성·SK 산단 중심 반도체 생태계(협력사·연구소·기숙사·병원·상권) 완성을 가속화.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">AI 반려동물 플랫폼 등 스마트시티 고도화</span><span class="pledge-item__detail">AI 기반 반려동물 등록·실종신고 통합플랫폼 등 디지털 생활서비스를 확대해 스마트시티 수준 제고.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">용인공영버스터미널 재건축</span><span class="pledge-item__detail">노후 공영버스터미널을 복합환승센터로 재건축해 시외·광역버스 환승 허브 기능 강화.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">'용인 르네상스 시즌2' — 공약 이행률 95% 강조</span><span class="pledge-item__detail">민선 8기 공약 212건 중 완료·이행 후 계속추진을 합쳐 95% 수준의 이행률을 내세움. 재선 공약은 새 사업보다 기존 반도체 산단·교통망·플랫폼시티를 끊기지 않게 완성하는 ‘연속성’에 초점.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">반도체고속도로 · 용인-성남·충주고속도로</span><span class="pledge-item__detail">반도체고속도로, 용인-성남·용인-충주·의왕-용인-광주 고속도로 등 동서남북 도로망을 묶어 산단 물류와 시민 통행을 분산. 목표는 시내 어디서든 10~20분 내 고속도로 접근권 확보.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">경강선 연장 · 3호선 연장 · 신분당선 지선</span><span class="pledge-item__detail">경강선 연장, 서울 3호선 연장·대안노선, 신분당선 지선·대안노선을 동시에 밀어 수지·기흥·처인의 철도 불균형을 줄이는 전략. 단기 착공보다는 국가계획 반영·예타 통과·재원분담 협상이 핵심.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">반도체 특화 대도시 완성도 제고</span><span class="pledge-item__detail">용인 국가산단·원삼 SK클러스터·기흥 삼성 거점을 하나의 ‘반도체 특화 대도시’로 연결. 협력사 입주, 인력 양성, 병원·학교·상업시설까지 묶어 인구 150만 광역도시 기반을 만들겠다는 그림.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">AI 반려동물 플랫폼 등 스마트시티 고도화</span><span class="pledge-item__detail">반려동물 등록·실종 신고·보호소 연계를 AI 플랫폼으로 묶는 생활밀착형 디지털 행정. 교통·복지·민원 분야에도 AI 기반 상담·신고·예약 시스템을 확장하는 스마트시티 노선.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">용인공영버스터미널 재건축</span><span class="pledge-item__detail">용인공영버스터미널 재건축을 통해 시외버스·광역버스·시내버스 환승 동선을 개선. 처인 중심 사업이지만 전체 용인의 광역 이동망을 보완하는 교통 허브 역할을 기대.</span></div></li>
             </ul>
           </div>
         </div>
@@ -1350,23 +1436,19 @@ footer p + p { margin-top: var(--s-03); }
 
         <div class="candidates-grid">
           <div class="candidate-tile candidate-tile--민주">
-            <span class="party-pill party-pill--민주">더불어민주당</span>
-            <div class="cand-name">이건한</div>
-            <div class="cand-role">前 용인시의원 (1966년생)</div>
+            <div class="cand-headline"><div class="cand-photo cand-photo--민주"><img src="assets/candidates/lee-gunhan.jpg" alt="이건한 후보 사진" loading="lazy" referrerpolicy="no-referrer"></div><div class="cand-meta"><span class="party-pill party-pill--민주">더불어민주당</span><div class="cand-name">이건한</div><div class="cand-role">前 용인시의원 (1966년생)</div></div></div>
             <ul class="pledge-list">
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">수지구 교통 인프라 확충 (신분당선 연장 등)</span><span class="pledge-item__detail">신분당선 연장선 수지 구간 조기 추진과 광역버스 노선 증편을 경기도의회 차원에서 적극 추진.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">신도시 과밀 학교 해소 및 교육환경 개선</span><span class="pledge-item__detail">수지 광교·동천 등 신도시 과밀 학교 문제를 경기도 교육 예산 배분 의정활동을 통해 우선 해결.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">민주당 원팀 공약 연계 추진</span><span class="pledge-item__detail">경기도지사·용인시장 민주당 후보들과 연계해 수지구 현안을 경기도의회 안건으로 상정·처리.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">수지구 교통 인프라 확충 (신분당선 연장 등)</span><span class="pledge-item__detail">신분당선 연장·광역버스 증차·환승정류장 개선을 도 예산·도시철도 계획과 연계해 추진. 수지구 출퇴근 병목인 죽전·동천·상현 축의 버스 배차간격 단축과 정류장 혼잡 완화가 핵심.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">신도시 과밀 학교 해소 및 교육환경 개선</span><span class="pledge-item__detail">동천·상현·성복권 과밀학급, 통학구역 재조정, 급식실·체육관·돌봄교실 증설을 도교육청 예산 심의에서 우선순위화. 학교 신설이 어려운 지역은 모듈러 교실·시설 증축·통학 안전 개선을 병행.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">민주당 원팀 공약 연계 추진</span><span class="pledge-item__detail">민주당 도지사·시장 후보의 경기남부광역철도, 공공돌봄, 주거정책과 지역 도의원 공약을 묶어 예산·조례·도정질문으로 압박. 다만 중앙·도·시 권한이 섞인 공약은 역할 분담이 명확해야 함.</span></div></li>
             </ul>
           </div>
           <div class="candidate-tile candidate-tile--국힘">
-            <span class="party-pill party-pill--국힘">국민의힘</span>
-            <div class="cand-name">강웅철</div>
-            <div class="cand-role">現 경기도의원 (1964년생) — 재선 도전</div>
+            <div class="cand-headline"><div class="cand-photo cand-photo--국힘">姜</div><div class="cand-meta"><span class="party-pill party-pill--국힘">국민의힘</span><div class="cand-name">강웅철</div><div class="cand-role">現 경기도의원 (1964년생) — 재선 도전</div></div></div>
             <ul class="pledge-list">
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">4년간 수지구 도의회 활동 연속성 강조</span><span class="pledge-item__detail">前 임기 4년간 수지구 교통·복지·환경 현안을 경기도의회에서 처리한 실적을 근거로 행정 연속성 강조.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">광역교통·생활 인프라 의정 활동 실적</span><span class="pledge-item__detail">GTX-A 수지 정차 추진, 도로 확장 예산 확보 등 광역 인프라 의정 성과를 재선 핵심 근거로 제시.</span></div></li>
-              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">수지권 현안 해결 경험 강점</span><span class="pledge-item__detail">이상일 용인시장·국힘 광역의원 네트워크와 연계해 수지구 생활 현안을 신속히 처리할 수 있는 협력 체계.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">4년간 수지구 도의회 활동 연속성 강조</span><span class="pledge-item__detail">현역 도의원으로 축적한 도청·도교육청 예산 라인과 상임위 경험을 활용해 계속사업의 중단을 막겠다는 메시지. 신규 대형공약보다 이미 추진 중인 교통·학교·복지 예산을 마무리하는 데 강점.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">광역교통·생활 인프라 의정 활동 실적</span><span class="pledge-item__detail">GTX-A 연계 교통, 용서고속도로·수지 주요 간선도로 정체, 광역버스 증차 등 ‘도 단위 조정’이 필요한 의제를 전면에 둠. 도로 확장·방음벽·보행안전 예산처럼 생활 SOC 확보 능력을 재선 명분으로 제시.</span></div></li>
+              <li class="pledge-item"><span class="pledge-bullet"></span><div><span class="pledge-item__title">수지권 현안 해결 경험 강점</span><span class="pledge-item__detail">국힘 현직 시장과 같은 정당 네트워크를 활용해 도비·시비 매칭사업을 빠르게 조율하겠다는 전략. 수지구 공원·하천·체육시설·노후도로 정비처럼 소규모 예산이 잦은 사업에서 실무형 장점을 주장.</span></div></li>
             </ul>
           </div>
         </div>
